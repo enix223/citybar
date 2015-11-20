@@ -1,0 +1,35 @@
+{
+  "name": "opensvm",
+  "version": "1.0.0",
+  "description": "A platform to provide open city service",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "bower": "^1.6.5",
+    "angular": "~1.3.0",
+    "angular-mocks": "~1.3.0",
+    "jquery": "2.1.1",
+    "bootstrap": "~3.1.1",
+    "angular-route": "~1.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enix223/opensvm.git"
+  },
+  "keywords": [
+    "public",
+    "service"
+  ],
+  "author": "Enix Yu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/enix223/opensvm/issues"
+  },
+  "homepage": "https://github.com/enix223/opensvm#readme"
+}

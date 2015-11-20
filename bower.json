@@ -1,0 +1,33 @@
+{
+  "name": "opensvm",
+  "description": "A platform to provide open city service",
+  "main": "index.js",
+  "authors": [
+    "Enix Yu"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "city",
+    "service"
+  ],
+  "homepage": "https://github.com/enix223/opensvm",
+  "moduleType": [
+    "node"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-mocks": "~1.3.0",
+    "angular-route": "~1.3.0",
+    "jquery": "2.1.1",
+    "uikit": "~2.23.0",
+    "angular-resource": "~1.3.0"
+  }
+}

@@ -1,0 +1,43 @@
+<html ng-app="OpenSVM">
+<head>
+	<title>OpenSVM - Easy, share and enjoy open service</title>
+	<script type="text/javascript" src="http://cdn.bootcss.com/angular.js/1.4.7/angular.min.js"></script>
+</head>
+<body>
+	<div ng-controller="TestCtrl as test">
+		<div ng-repeat="item in test.items" ng-click="test.insertItem(item)">
+			<h3>{{ item.title }}</h3>
+			<p>{{ item.desc }}</p>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	var opensvm = angular.module('OpenSVM', []);
+	opensvm.factory('OpenSVMHelper', function(){});
+	opensvm.service('OpenSVMModel', function(){});
+	opensvm.controller('TestCtrl', function(){});
+	opensvm.directive('items', function(){});
+
+	opensvm.controller('TestCtrl', function(){
+		var main = this;
+
+		main.items = [
+			{
+				title: 'First item',
+				desc: 'First item desc'
+			},
+			{
+				title: 'Second item',
+				desc: 'Second item desc'
+			}
+		];
+
+		main.insertItem = function(){
+			main.items.push({
+				title: 'New item',
+				desc: 'New item desc'
+			});
+		};
+	});
+</script>
+</html>
