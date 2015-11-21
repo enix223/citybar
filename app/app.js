@@ -1,13 +1,17 @@
-var citybarApp = angular.module("citybarApp", []);
+'use strict';
 
-var bikeMapService = angular.module("bikeMapService", ['ngResource']);
-
-bikeMapService.factory('Bike', ['$resource', 
-	function($resource){
-		return $resource('data/bike/map.json', {});
-	}
+var citybarApp = angular.module("citybarApp", [
+	'ngRoute',
+	'BikeControllers'
 ]);
 
-citybarApp.controller('BikeMainCtrl', [], function($scope){
-	$scope
-});
+citybarApp.config(['$routeProvider', '$locationProvider', 
+	function($routeProvider, $locationProvider){
+		$routeProvider
+			.when('/', {
+				templateUrl: 'templates/bike/main.html',
+				controller: 'BikeMainCtrl'
+			});
+		$locationProvider.html5Mode(false).hashPrefix('!');
+	}
+]);

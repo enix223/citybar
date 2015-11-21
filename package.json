@@ -1,5 +1,5 @@
 {
-  "name": "opensvm",
+  "name": "citybarm",
   "version": "1.0.0",
   "description": "A platform to provide open city service",
   "main": "index.js",
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/enix223/opensvm.git"
+    "url": "git+https://github.com/enix223/citybar.git"
   },
   "keywords": [
     "public",
@@ -29,7 +29,7 @@
   "author": "Enix Yu",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/enix223/opensvm/issues"
+    "url": "https://github.com/enix223/citybar/issues"
   },
-  "homepage": "https://github.com/enix223/opensvm#readme"
+  "homepage": "https://github.com/enix223/citybar#readme"
 }

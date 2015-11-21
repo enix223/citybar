@@ -1,42 +1,29 @@
 <!DOCTYPE html>
-<html ng-app="citybar">
+<html ng-app="citybarApp">
 <head>
 	<title>Citybar - Enjoy your life</title>
-	<meta name="encode" content="utf-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />  
-	<link rel="stylesheet" type="text/css" href="vendor/uikit/css/uikit.min.css">
-	<script type="text/javascript" src="vendor/jquery/dist/jquery.min.js"></script>
-	<!--script type="text/javascript" src="vendor/angular/angular.min.js"></script-->
-	<!--script type="text/javascript" src="vendor/angular.min.js"></script-->
-	<script type="text/javascript" src="vendor/uikit/js/uikit.min.js"></script>
-	<!--script type="text/javascript" src="/vendor/app.js"></script-->
+	<link rel="stylesheet" type="text/css" href="static/css/app.css">
+	<link rel="stylesheet" type="text/css" href="vendor/amazeui/dist/css/amazeui.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/amazeui/dist/css/amazeui.flat.min.css">
 	<style type="text/css">  
 	    html{height:100%}    
 	    body{height:100%;margin:0px;padding:0px}    
-	    #container{height:100%}    
+	    #mapper{height:100%}    
+	    .container{height: 100%}
 	</style>
 </head>
-<body ng-controller="AppCtrl">
-	<div ng-view id="container"></div>
+
+<body>	
+	<div class="container" ng-view></div>
 </body>
+
+<script type="text/javascript" src="vendor/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="vendor/angular/angular.min.js"></script>
+<script type="text/javascript" src="vendor/angular-route/angular-route.min.js"></script>
+<script type="text/javascript" src="vendor/amazeui/dist/js/amazeui.min.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=FOjTR630GO7Innlj8ZRobXYR"></script>
-<script type="text/javascript">
-	var map = new BMap.Map("container");
-	var point = new BMap.Point(116.331398,39.897445);
-	map.centerAndZoom(point,20);
-
-	var geolocation = new BMap.Geolocation();
-	geolocation.getCurrentPosition(function(r){
-		if(this.getStatus() == BMAP_STATUS_SUCCESS){
-			var mk = new BMap.Marker(r.point);
-			map.addOverlay(mk);
-			map.panTo(r.point);
-			alert('您的位置：'+r.point.lng+','+r.point.lat);
-		}
-		else {
-			alert('failed'+this.getStatus());
-		}        
-	}, {enableHighAccuracy: true});
-
-</script>
+<script type="text/javascript" src="app/app.js"></script>
+<script type="text/javascript" src="app/controller/bike.js"></script>
 </html>

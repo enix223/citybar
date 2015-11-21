@@ -1,0 +1,22 @@
+/**
+  * Navbar Theme: default
+  * Author: hzp (hzp@yunshipei.com)
+  */
+.am-navbar-success a {
+  color: #ffffff;
+}
+
+.am-navbar-success .am-navbar-nav {
+  background-color: #5eb95e;
+}
+.am-navbar-success .am-navbar-actions {
+  background-color: #5eb95e;
+}
+.am-navbar-success .am-navbar-actions a {
+  border-bottom: 1px solid #5eb95e;
+}
+
+.am-navbar-success-btn:hover 
+.am-navbar-success-btn:focus {
+  background-color: #4aaa4a;
+}

@@ -1,0 +1,9 @@
+<div>
+	<div ng-repeat="customer in customers">
+		<span>{{ customer.id }}</span>
+		<a href="#!customer/{{customer.id}}">{{ customer.name }}</a>
+		<span>{{ customer.phone }}</span>
+	</div>
+
+	<a href="#!addCustomer">Add a customer</a>
+</div>
