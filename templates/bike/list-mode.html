@@ -1,0 +1,17 @@
+<div ng-include src="'templates/bike/menu.html'"></div>
+<div class="am-g">
+	<div class="am-u-sm-12">
+		<h3 class="am-link-muted am-margin-top">
+			<i class="am-icon-location-arrow"></i> &nbsp;您现在的位置是: 
+			<span>{{ address }}</span>
+		</h3>
+	</div>
+	<div class="am-u-sm-12">
+		<ul class="am-list am-list-border">
+			<li ng-repeat="bike in bikes">
+				<a href="#"><i class="am-icon-bicycle am-icon-fw"></i> &nbsp;{{bike.name}}</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<div ng-include src="'templates/bike/tab-bar.html'"></div>

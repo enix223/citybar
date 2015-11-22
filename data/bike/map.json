@@ -14,5 +14,29 @@
 		"numberOfBikes": 30,
 		"latitude": 23.1131,
 		"longtitude": 25.1131
+	},
+	{
+		"id": 2,
+		"district": "大良镇",
+		"name": "钟楼公园2站",
+		"numberOfBikes": 30,
+		"latitude": 23.1131,
+		"longtitude": 25.1131
+	},
+	{
+		"id": 2,
+		"district": "大良镇",
+		"name": "钟楼公园2站",
+		"numberOfBikes": 30,
+		"latitude": 23.1131,
+		"longtitude": 25.1131
+	},
+	{
+		"id": 2,
+		"district": "大良镇",
+		"name": "钟楼公园2站",
+		"numberOfBikes": 30,
+		"latitude": 23.1131,
+		"longtitude": 25.1131
 	}
 ]
