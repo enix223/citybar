@@ -1,0 +1,12 @@
+[
+	{
+		"id": 1,
+		"groupName": "bikes",
+		"groupNameCh": "公共自行车"
+	},
+	{
+		"id": 2,
+		"groupName": "wifi",
+		"groupNameCh": "公共wifi热点"
+	}
+]

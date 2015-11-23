@@ -1,0 +1,26 @@
+[
+	{
+		"id": 5283002001,
+		"district": "大良镇",
+		"name": "顺德图书馆 (W-FoShan.SD)",
+		"number": 75,
+		"latitude": 22.8064900000,
+		"longitude": 113.3014920000
+	},
+	{
+		"id": 5283002002,
+		"district": "大良镇",
+		"name": "顺德博物馆 (W-FoShan.SD)",
+		"number": 27,
+		"latitude": 22.8065980000,
+		"longitude": 113.3023350000
+	},
+	{
+		"id": 5283002003,
+		"district": "大良镇",
+		"name": "德胜文化广场 (W-FoShan.SD)",
+		"number": 24,
+		"latitude": 22.8096880000,
+		"longitude": 113.3011240000
+	}
+]

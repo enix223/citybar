@@ -1,6 +1,6 @@
 var MapControllers = angular.module('MapControllers', []);
 
-MapControllers.controller('BikeMapCtrl', 
+MapControllers.controller('MapModeCtrl', 
 	['$scope', '$routeParams', 'getMapper', 'getCurrentLocation', 'getNavControl', 
 	 'getGeolocationControl', 'addBicycle', 'getBikesData', 'addAutoComplete', 'getWifiApData',
 
@@ -13,7 +13,7 @@ MapControllers.controller('BikeMapCtrl',
 
 		$scope.map = getMapper("mapper");
 
-		var point = new BMap.Point(116.331398,39.897445);
+		var point = new BMap.Point(113.2606120000,22.8461620000);
 		$scope.map.centerAndZoom(point, 17);
 
 		$scope.navigationControl = getNavControl();
@@ -85,9 +85,9 @@ MapControllers.controller('BikeMapCtrl',
 }]);
 
 
-MapControllers.controller('BikeListCtrl', 
-	['$scope', '$routeParams', 'getBikesData', 'getGeolocationControl', 'getMapper', 'jsonSort',
-	function ListModeCtrl($scope, $routeParams, getBikesData, getGeolocationControl, getMapper, jsonSort){
+MapControllers.controller('ListModeCtrl', 
+	['$scope', '$routeParams', 'getBikesData', 'getGeolocationControl', 'getMapper', 'jsonSort', 'getWifiApData',
+	function ListModeCtrl($scope, $routeParams, getBikesData, getGeolocationControl, getMapper, jsonSort, getWifiApData){
 
 		$scope.map = getMapper("mapper");
 		$scope.group = $routeParams.group;
@@ -99,11 +99,11 @@ MapControllers.controller('BikeListCtrl',
 				getBikesData.get({}, 
 					function success(response){
 						for(var i = 0; i < response.length; i ++){
-							var bikePoint = new BMap.Point(response[i].longitude, response[i].latitude);
-							response[i].distance = Number(($scope.map.getDistance($scope.point, bikePoint)).toFixed(2));
+							var dataPoint = new BMap.Point(response[i].longitude, response[i].latitude);
+							response[i].distance = Math.round($scope.map.getDistance($scope.point, dataPoint));
 						}
 						response.sort(jsonSort('asc', 'distance'));
-						$scope.bikes = response;
+						$scope.dataPoints = response;
 					},
 					function error(errorResponse){
 						console.log('Error: ' + JSON.stringify(errorResponse));
@@ -113,11 +113,11 @@ MapControllers.controller('BikeListCtrl',
 				getWifiApData.get({}, 
 					function success(response){
 						for(var i = 0; i < response.length; i ++){
-							var bikePoint = new BMap.Point(response[i].longitude, response[i].latitude);
-							response[i].distance = Number(($scope.map.getDistance($scope.point, bikePoint)).toFixed(2));
+							var dataPoint = new BMap.Point(response[i].longitude, response[i].latitude);							
+							response[i].distance = Math.round($scope.map.getDistance($scope.point, dataPoint));
 						}
 						response.sort(jsonSort('asc', 'distance'));
-						$scope.bikes = response;
+						$scope.dataPoints = response;
 					},
 					function error(errorResponse){
 						console.log('Error: ' + JSON.stringify(errorResponse));

@@ -1,0 +1,71 @@
+<div ng-include src="'templates/general/menu.html'"></div>
+<div id="mapper" style="display: none;"></div>
+<div class="am-g">
+  <div class="am-u-sm-12 am-margin-top">
+    <h1 class="am-text-danger"><i class="am-icon-bug"></i> &nbsp;GPS数据纠正</h1>
+    <hr>
+  </div>
+  <div class="am-u-sm-12">
+    <p>因为个人能力有限，搜集的GPS数据难免有所遗漏与错误。所以，我们很需要你的贡献与支持。你的支持与贡献，将会让广大市民受益。感谢以下的贡献者:</p>
+  </div>
+  <div class="am-u-sm-12">
+      <section data-am-widget="accordion" class="am-accordion am-accordion-default" data-am-accordion='{ "multiple": true }'>
+        <dl class="am-accordion-item">
+          <dt class="am-accordion-title"><i class="am-icon-bicycle"></i> 公共自行车数据贡献者</dt>
+          <dd class="am-accordion-bd am-collapse">
+            <!-- Bike contribute list -->
+            <div class="am-accordion-content">
+                <p>排名不分先后</p>
+                <div ng-repeat="contrib in contributors | filter: {group:1}" 
+                  class="am-badge am-badge-success">{{contrib.contributor}}</div>
+            </div>
+          </dd>
+        </dl>
+        <dl class="am-accordion-item">
+          <dt class="am-accordion-title"><i class="am-icon-wifi"></i> 公共wifi热点数据贡献者</dt>
+          <dd class="am-accordion-bd am-collapse">
+            <!-- Bike contribute list -->
+            <div class="am-accordion-content">
+                <p>排名不分先后</p>
+                <div ng-repeat="contrib in contributors | filter: {group:2}" 
+                  class="am-badge am-badge-success">{{contrib.contributor}}</div>
+            </div>
+          </dd>
+        </dl>
+    </section>    
+  </div>
+  <div class="am-u-sm-12">
+  	<form class="am-form">
+  		<legend></legend>
+      <div class="am-form-control">
+        <label>您的尊称</label>
+        <input type="text" ng-model="author">
+      </div>  		
+  		<div class="am-form-control">
+  			<label>需要纠正的数据类型</label>
+        <select ng-model="selectGroup" ng-change="groupChange(selectGroup)">
+            <option ng-repeat="group in groups" value="{{group.id}}">{{group.groupNameCh}}</option>
+        </select>
+  		</div>
+  		<div class="am-form-control">
+  			<label>需要纠正的数据点</label>
+          <select ng-model="selectData" data-am-selected="{searchBox: 1}" style="width: 100%">
+              <option ng-repeat="data in dataArr" value="{{data.id}}">{{data.name}}</option>
+          </select>
+  		</div>
+      <div class="am-form-control am-margin-top" ng-show="myPoint">
+        <p class="am-text-primary am-text-sm"><i class="am-icon-location-arrow"></i> 您当前的位置是: ({{myPoint.lng}}, {{myPoint.lat}})</p>
+      </div>
+      <div class="am-form-control" ng-show="selectData">
+        <p class="am-text-danger am-text-sm" ng-repeat="data in dataArr | filter:{id:selectData}">
+        <i class="am-icon-location-arrow"></i> {{data.name}}当前的位置是: ({{data.longitude}}, {{data.latitude}})</p>
+      </div>
+
+
+      <div class="am-form-control am-margin-bottom">
+        <br/>
+        <button type="submit" class="am-btn am-btn-danger am-btn-lg">提交纠正数据</button>
+      </div>
+  	</form>
+  </div>
+</div>
