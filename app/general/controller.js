@@ -1,12 +1,23 @@
 var GeneralControllers = angular.module('GeneralControllers', []);
 
-GeneralControllers.controller('DonateController', function(){
+GeneralControllers.controller('DonateCtrl', function(){
 	$scope.account = 'figo223'
 });
 
-GeneralControllers.controller('AboutController', function(){
-	
-});
+GeneralControllers.controller('AboutCtrl', ['$scope', 'getContributors', 
+	function($scope, getContributors){
+		$.AMUI.accordion.init();
+		
+		// Get contributors
+		getContributors.get({}, 
+			function success(response){
+				$scope.contributors = response;
+			}, 
+			function error(errorResponse){
+				console.log('Get contributors failed, ' + JSON.stringify(errorResponse));
+			}
+		);
+}]);
 
 
 /**

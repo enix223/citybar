@@ -67,31 +67,6 @@ MapServices.factory('jsonSort', function(){
 	}
 });
 
-MapServices.factory('addBicycle', function(){
-	return function(map, point, text){
-		function ComplexCustomOverlay(map, point, text){
-		  this._point = point;
-		  this._text = text;
-		  this._map = map;
-		}
-		ComplexCustomOverlay.prototype = new BMap.Overlay();
-		ComplexCustomOverlay.prototype.initialize = function(map){
-		  	this._map = map;
-		  	var div = this._div = document.createElement("div");
-		  	div.innerHTML = "<i class='am-icon-bicycle'></i> " + this._text;
-		  	this._map.getPanes().labelPane.appendChild(div);
-			return div;
-		}
-		ComplexCustomOverlay.prototype.draw = function(){
-			var map = this._map;
-			var pixel = map.pointToOverlayPixel(this._point);
-			this._div.style.left = pixel.x;
-			this._div.style.top  = pixel.y;
-	    }
-		return ComplexCustomOverlay;
-	}
-});
-
 MapServices.factory('getMapper', function(){
 	return function(id){
 		return new BMap.Map(id);

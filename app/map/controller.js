@@ -2,11 +2,11 @@ var MapControllers = angular.module('MapControllers', []);
 
 MapControllers.controller('MapModeCtrl', 
 	['$scope', '$routeParams', 'getMapper', 'getCurrentLocation', 'getNavControl', 
-	 'getGeolocationControl', 'addBicycle', 'getBikesData', 'addAutoComplete', 'getWifiApData',
+	 'getGeolocationControl', 'getBikesData', 'addAutoComplete', 'getWifiApData',
 
 	 function MapModeCtrl($scope, $routeParams, getMapper, getCurrentLocation, 
 	 					  getNavControl, getGeolocationControl, 
-	 					  addBicycle, getBikesData, addAutoComplete){
+	 					  getBikesData, addAutoComplete, getWifiApData){
 
 	 	// Get the data group to be displayed
 	 	$scope.group = $routeParams.group;
@@ -17,16 +17,18 @@ MapControllers.controller('MapModeCtrl',
 		$scope.map.centerAndZoom(point, 17);
 
 		$scope.navigationControl = getNavControl();
-  		$scope.map.addControl($scope.navigationControl);
+  		$scope.map.addControl($scope.navigationControl);  		
 
   		fnGetJsonData = function(group){
   			if(group == "bikes"){
 	  			getBikesData.get({}, 
 					function success(response){
 						for(var i = 0; i < response.length; i ++){
-							var bikePoint = new BMap.Point(response[i].longitude, response[i].latitude);						
-	      					var myCompOverlay = addBicycle($scope.map, bikePoint, response[i].name);
-	      					$scope.map.addOverlay(myCompOverlay);
+							var mkPoint = new BMap.Point(response[i].longitude, response[i].latitude);
+	      					var myIcon = new BMap.Icon("static/img/fa-bicycle.png", new BMap.Size(30,30));
+							var myMarker = new BMap.Marker(mkPoint, {icon:myIcon});  // 创建标注
+	      					$scope.map.addOverlay(myMarker);
+	      					myMarker.setAnimation(BMAP_ANIMATION_DROP); //跳动的动画
 						}
 					},
 					function error(errorResponse){
@@ -37,9 +39,11 @@ MapControllers.controller('MapModeCtrl',
   				getWifiApData.get({}, 
 					function success(response){
 						for(var i = 0; i < response.length; i ++){
-							var bikePoint = new BMap.Point(response[i].longitude, response[i].latitude);						
-	      					var myCompOverlay = addBicycle($scope.map, bikePoint, response[i].name);
-	      					$scope.map.addOverlay(myCompOverlay);
+							var mkPoint = new BMap.Point(response[i].longitude, response[i].latitude);
+	      					var myIcon = new BMap.Icon("static/img/fa-wifi.png", new BMap.Size(30,30));
+							var myMarker = new BMap.Marker(mkPoint, {icon:myIcon});  // 创建标注
+	      					$scope.map.addOverlay(myMarker);
+	      					myMarker.setAnimation(BMAP_ANIMATION_DROP); //跳动的动画
 						}
 					},
 					function error(errorResponse){
@@ -63,7 +67,7 @@ MapControllers.controller('MapModeCtrl',
 				$scope.map.addOverlay(mk);
 				$scope.map.panTo(e.point);
 
-			fnGetJsonData();
+			fnGetJsonData($scope.group);
 	  	}
 
 	  	fnGetLocationFail = function(e){

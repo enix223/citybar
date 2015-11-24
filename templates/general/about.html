@@ -1,0 +1,39 @@
+<div ng-include src="'templates/general/menu.html'"></div>
+<div id="mapper" style="display: none;"></div>
+<div class="am-g">
+	<div class="am-u-sm-12 am-text-center">
+		<h1 class="am-text-success am-margin-xl "><i class="am-icon-star am-icon-spin"></i> &nbsp;关于我们</h1>
+	<hr>
+	</div>
+	<div class="am-u-sm-12">
+		<p class="am-margin-xl">出于对生活的热爱，对生活的这个城市的喜欢，所以有了这么一个公益项目。因为这个项目是业余时间所作，内容可能有不恰当的地方，希望亲们多多包涵。如果你觉得这个项目可以帮到你，我们会倍感欣慰。</p>
+		<p class="am-margin-xl">如果您对我们的项目有什么建议和意见，可以发邮件到enix223#163.com。您的建议和意见是我们改进的动力。</p>
+		<p class="am-margin-xl">感谢如下无私奉献的亲们:</p>
+		<div class="am-margin-xl">
+	      <section data-am-widget="accordion" class="am-accordion am-accordion-default" data-am-accordion='{ "multiple": true }'>
+	        <dl class="am-accordion-item">
+	          <dt class="am-accordion-title"><i class="am-icon-bicycle"></i> 公共自行车数据贡献者</dt>
+	          <dd class="am-accordion-bd am-collapse">
+	            <!-- Bike contribute list -->
+	            <div class="am-accordion-content">
+	                <p>排名不分先后</p>
+	                <div ng-repeat="contrib in contributors | filter: {group:1}" 
+	                  class="am-badge am-badge-success">{{contrib.contributor}}</div>
+	            </div>
+	          </dd>
+	        </dl>
+	        <dl class="am-accordion-item">
+	          <dt class="am-accordion-title"><i class="am-icon-wifi"></i> 公共wifi热点数据贡献者</dt>
+	          <dd class="am-accordion-bd am-collapse">
+	            <!-- Bike contribute list -->
+	            <div class="am-accordion-content">
+	                <p>排名不分先后</p>
+	                <div ng-repeat="contrib in contributors | filter: {group:2}" 
+	                  class="am-badge am-badge-success">{{contrib.contributor}}</div>
+	            </div>
+	          </dd>
+	        </dl>
+	    </section>
+	   </div>
+	</div>		
+</div>

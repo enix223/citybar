@@ -21,6 +21,9 @@ citybarApp.config(['$routeProvider', '$locationProvider',
 			}).when('/reportError/', {
 				templateUrl: 'templates/general/report-error.html',
 				controller: 'ReportErrorCtrl'
+			}).when('/about/', {
+				templateUrl: 'templates/general/about.html',
+				controller: 'AboutCtrl'
 			}).otherwise({
                 redirectTo: '/mapMode/bikes/'
             });;
