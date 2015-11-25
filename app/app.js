@@ -25,7 +25,7 @@ citybarApp.config(['$routeProvider', '$locationProvider',
 				templateUrl: 'templates/general/about.html',
 				controller: 'AboutCtrl'
 			}).otherwise({
-                redirectTo: '/mapMode/bikes/'
+                redirectTo: '/mapMode/bicycle/'
             });;
 		$locationProvider.html5Mode(false).hashPrefix('!');
 	}
