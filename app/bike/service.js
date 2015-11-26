@@ -3,7 +3,7 @@
 var MapServices = angular.module('MapServices', ['ngResource']);
 
 MapServices.factory('addAutoComplete', function(){
-	return function(map, autocompleId, searchResultPanelId, fnOnConfirm){
+	return function(map, myPoint, autocompleId, searchResultPanelId, fnOnConfirm, pFnOnConfirm){
 		var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
 			{"input" : autocompleId
 			,"location" : map
@@ -44,10 +44,11 @@ MapServices.factory('addAutoComplete', function(){
 		function setPlace(){
 			map.clearOverlays();    //清除地图上所有覆盖物
 			function myFun(){
-				var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
-				map.centerAndZoom(pp, 18);
-				map.addOverlay(new BMap.Marker(pp));    //添加标注
-				fnOnConfirm();  // Call on-confirm callback when location change
+				myPoint.lat = local.getResults().getPoi(0).point.lat;    //获取第一个智能搜索的结果
+				myPoint.lng = local.getResults().getPoi(0).point.lng;
+				map.centerAndZoom(myPoint, 17);
+				map.addOverlay(new BMap.Marker(myPoint));    //添加标注
+				fnOnConfirm(pFnOnConfirm);  // Call on-confirm callback when location change
 			}
 			var local = new BMap.LocalSearch(map, { //智能搜索
 			  onSearchComplete: myFun

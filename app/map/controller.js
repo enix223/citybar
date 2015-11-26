@@ -14,7 +14,7 @@ MapControllers.controller('MapModeCtrl',
   		  * @retval None
   		  */
   		fnWalkRouting = function(e){  						
-			walking.search($scope.myPoint, e.point);
+			walking.search($scope.myPoint, e.currentTarget.point);
   		}
 
   		/**
@@ -94,6 +94,60 @@ MapControllers.controller('MapModeCtrl',
 			fnGetJsonData($scope.group);
 	  	}
 
+	  	/* auto complete */
+	  	fnCreateAutoComplete = function(map, autocompleId, searchResultPanelId, fnOnConfirm){
+		  	var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+				{"input" : autocompleId
+				,"location" : map
+			});
+
+			// 百度地图API功能
+			function G(id) {
+				return document.getElementById(id);
+			}
+
+			ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+				var str = "";
+					var _value = e.fromitem.value;
+					var value = "";
+					if (e.fromitem.index > -1) {
+						value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+					}    
+					str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+					
+					value = "";
+					if (e.toitem.index > -1) {
+						_value = e.toitem.value;
+						value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+					}    
+					str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+					G(searchResultPanelId).innerHTML = str;
+			});
+
+			var myValue;
+			ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+				var _value = e.item.value;
+				myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+				G(searchResultPanelId).innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+				
+				setPlace();
+			});
+
+			function setPlace(){
+				map.clearOverlays();    //清除地图上所有覆盖物
+				function myFun(){
+					$scope.myPoint = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+					map.centerAndZoom($scope.myPoint, 17);
+					map.addOverlay(new BMap.Marker($scope.myPoint));    //添加标注
+					fnOnConfirm($scope.group);  // Call on-confirm callback when location change
+				}
+				var local = new BMap.LocalSearch(map, { //智能搜索
+				  onSearchComplete: myFun
+				});
+				local.search(myValue);
+			}
+		}
+
 	  	// Get the data group to be displayed
 	 	$scope.group = $routeParams.group;
 
@@ -117,10 +171,11 @@ MapControllers.controller('MapModeCtrl',
 		// 开始定位
 		$scope.geolocationControl.location();
 
-		// 添加autocomplete
-		//addAutoComplete(mapper, 'searchInput', 'searchResultPanel', fnGetBikesData);
-
 		$scope.includeSearch = true;
+
+		$scope.initAutoComplete = function(){
+			fnCreateAutoComplete(mapper, 'searchInput', 'searchResultPanel', fnGetJsonData);
+		}
 }]);
 
 

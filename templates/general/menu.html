@@ -1,40 +1,52 @@
-<header class="am-topbar am-cf" style="margin-bottom: 0">
-  <h1 class="am-topbar-brand">    
-    <button class="am-topbar-btn am-btn am-btn-success am-show-sm-only am-btn-sm" 
-    data-am-offcanvas="{target: '#offcanvas-menu'}">
-      <span class="am-icon-leaf"></span></button>
-  </button>
-  </h1>
+<header class="am-topbar" style="margin-bottom: 0">
+  <div class="am-g">
+    <div class="am-u-sm-2">
+      <h1 class="am-topbar-brand">    
+        <button class="am-topbar-btn am-btn am-btn-default am-show-sm-only am-btn-sm am-text-success" 
+          data-am-offcanvas="{target: '#offcanvas-menu'}">
+          <span class="am-icon-leaf"> </span></button>
+        </button>
+      </h1>
 
-  <h1 class="am-topbar-brand am-center">CityBar</h1>
-
-  <!-- Offcanvas -->
-  <div id="offcanvas-menu" class="am-offcanvas">
-    <div class="am-offcanvas-bar am-offcanvas-bar-overlay">
-        <div class="am-offcanvas-content">
+      <!-- Offcanvas -->
+      <div id="offcanvas-menu" class="am-offcanvas">
+        <div class="am-offcanvas-bar am-offcanvas-bar-overlay">
+          <div class="am-offcanvas-content">
             <ul class="am-menu-nav am-avg-sm-1">
-                <li class="am-nav-header" style="text-align:center;"><i class="am-icon-leaf"></i> &nbsp;低碳生活, 从你我做起</li>
-                <li><a href="#!/mapMode/bicycle/"><i class="am-icon-bicycle"></i> &nbsp;公共自行车</a></li>
-                <li><a href="#!/mapMode/wifi/"><i class="am-icon-wifi"></i> &nbsp; 公共wifi热点</a></li>
-                <li><a href="#!/reportError/"><i class="am-icon-bug"></i> &nbsp; GPS数据纠正</a></li>
-                <li><a href=""><i class="am-icon-tree"></i> &nbsp;Donate</a></li>
-                <li><a href="#!/about/"><i class="am-icon-star am-icon-spin"></i> &nbsp;关于</a></li>
+              <li class="am-nav-header" style="text-align:center;"><i class="am-icon-leaf"></i> &nbsp;低碳生活, 从你我做起</li>
+              <li><a href="#!/mapMode/bicycle/"><i class="am-icon-bicycle"></i> &nbsp;公共自行车</a></li>
+              <li><a href="#!/mapMode/wifi/"><i class="am-icon-wifi"></i> &nbsp; 公共wifi热点</a></li>
+              <li><a href="#!/reportError/"><i class="am-icon-bug"></i> &nbsp; GPS数据纠正</a></li>
+              <li><a href=""><i class="am-icon-tree"></i> &nbsp;Donate</a></li>
+              <li><a href="#!/about/"><i class="am-icon-star am-icon-spin"></i> &nbsp;关于</a></li>
             </ul>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <div class="am-u-sm-8" style="text-align: center;">
+      <h1 class="am-topbar-brand" style="float: none;">CityBar</h1>
+    </div>
+
+    <div class="am-u-sm-2">
+      <button ng-show="includeSearch" class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-default am-show-sm-only am-text-success" 
+        data-am-collapse="{target: '#doc-topbar-collapse'}">
+      <span class="am-sr-only">搜索</span> 
+      <span class="am-icon-search"></span></button>
     </div>
   </div>
 
-  <button ng-show="includeSearch" class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" 
-    data-am-collapse="{target: '#doc-topbar-collapse'}">
-    <span class="am-sr-only">搜索</span> 
-  <span class="am-icon-search"></span></button>
-
-  <div ng-show="includeSearch" class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
-    <form class="am-topbar-form am-topbar-left am-form-inline" role="search">
-      <div class="am-form-group">
-        <input type="text" class="am-form-field am-input-sm" id="searchInput" placeholder="搜索">
-        <div id="searchResultPanel"></div>
+  <div class="am-g">
+    <div class="am-u-sm-12">
+      <div ng-show="includeSearch" class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+        <form class="am-topbar-form am-topbar-left am-form-inline" role="search">
+          <div class="am-form-group">
+            <input type="text" class="am-form-field am-input-sm" id="searchInput" placeholder="搜索">
+            <div id="searchResultPanel"></div>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 </header>

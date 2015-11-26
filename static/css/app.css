@@ -16,7 +16,6 @@
   border-bottom: 1px solid #5eb95e;
 }
 
-.am-navbar-success-btn:hover 
-.am-navbar-success-btn:focus {
-  background-color: #4aaa4a;
+.am-navbar-success .am-navbar-nav a:hover{
+  color: #99cc99;
 }

@@ -32,8 +32,6 @@ GeneralControllers.controller('ReportErrorCtrl', ['$scope', 'getGroupsData',
 		$.AMUI.accordion.init();
 		$('[data-am-selected]').selected({btnWidth: '100%', dropUp: 1});
 
-		$scope.map = getMapper("mapper");		
-
 		var geolocation = new BMap.Geolocation();
 		geolocation.getCurrentPosition(function(r){
 			if(this.getStatus() == BMAP_STATUS_SUCCESS){
