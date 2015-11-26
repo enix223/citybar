@@ -11,10 +11,13 @@ def unicode_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
 
 
 def csv2json(fin, fout):
-    reader = unicode_csv_reader(open(fin))
+    reader = unicode_csv_reader(open(fin), delimiter='\t')
     arr = []
     reader.next()
     for seq, postal, id, district, name, number, latitude, longitude in reader:
+        if not latitude:
+            continue
+
         obj = {}
         obj['id'] = id
         obj['district'] = district

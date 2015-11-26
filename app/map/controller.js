@@ -196,7 +196,8 @@ MapControllers.controller('ListModeCtrl',
 		fnGetJSONDataSuccess = function(response){
 			for(var i = 0; i < response.length; i ++){
 				var dataPoint = new BMap.Point(response[i].longitude, response[i].latitude);
-				response[i].distance = Math.round(mapper.getDistance($scope.point, dataPoint));
+				var distance = Math.round(mapper.getDistance($scope.point, dataPoint));
+				response[i].distance = (typeof distance == 'number') ? distance : 99999;
 			}
 			response.sort(jsonSort('asc', 'distance'));
 			$scope.dataPoints = response;
