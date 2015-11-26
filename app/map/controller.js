@@ -30,6 +30,11 @@ MapControllers.controller('MapModeCtrl',
 					mapper.addOverlay(myMarker);
 					myMarker.setAnimation(BMAP_ANIMATION_DROP); //跳动的动画
 					myMarker.addEventListener("click", fnWalkRouting);
+					myMarker.setTitle(response[i].name)
+					
+					// Label
+					//var label = new BMap.Label(response[i].name ,{offset:new BMap.Size(20,-10)});
+					//myMarker.setLabel(label);
 			}
 		}
 
