@@ -35,8 +35,23 @@
     </section>    
   </div>
   <div class="am-u-sm-12">
-  	<form class="am-form">
+  	<form class="am-form" ng-submit="submit()">
   		<legend></legend>
+
+      <!-- Progress -->
+      <div ng-show="progress">
+        <h3>请稍等...</h3>
+        <div class="am-progress am-progress-striped am-active">
+          <div class="am-progress-bar am-progress-bar-success" style="width: 100%"></div>
+        </div>
+      </div>
+
+      <!-- Alert box -->
+      <div class="am-alert am-alert-{{result}}" data-am-alert ng-show="message">
+        <button type="button" class="am-close">&times;</button>
+        <p>{{message}}</p>
+      </div>
+
       <div class="am-form-control">
         <label>您的尊称</label>
         <input type="text" ng-model="author">
@@ -64,8 +79,8 @@
 
       <div class="am-form-control am-margin-bottom">
         <br/>
-        <button type="submit" class="am-btn am-btn-danger am-btn-lg">提交纠正数据</button>
+        <button type="submit" class="am-btn am-btn-danger am-btn-lg" ng-disabled="progress">提交纠正数据</button>
       </div>
-  	</form>
+  	</form>    
   </div>
 </div>

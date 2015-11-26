@@ -24,9 +24,9 @@ GeneralControllers.controller('AboutCtrl', ['$scope', 'getContributors',
  *  @brief Data point fix controller
  */
 GeneralControllers.controller('ReportErrorCtrl', ['$scope', 'getGroupsData', 
-	'getMapper', 'getContributors', 'getBikesData', 'getWifiApData',
+	'getMapper', 'getContributors', 'getBikesData', 'getWifiApData', 'submitError',
 	
-	function($scope, getGroupsData, getMapper, getContributors, getBikesData, getWifiApData){
+	function($scope, getGroupsData, getMapper, getContributors, getBikesData, getWifiApData, submitError){
 
 		// Amazeui widget init.
 		$.AMUI.accordion.init();
@@ -94,6 +94,30 @@ GeneralControllers.controller('ReportErrorCtrl', ['$scope', 'getGroupsData',
 			}
 		};
 
-		
+		$scope.submit = function(){
+			$scope.progress = true;
+			$scope.message = '';
+			var data = {
+				project_id: 6,  // citybar
+				status_id: 1,   // open
+				priority_id: 4, // normal
+    			subject: "GPS Submit Data - " + $scope.selectData,    			
+    			description: $scope.author + "," + $scope.selectGroup + "," 
+    				+ $scope.selectData + "," + $scope.myPoint.lat + "," + $scope.myPoint.lng
+			};
+			submitError.post({
+				issue: data, 
+				key: '7a74c72afa037d7fdb52bdd99b076f573ca5eead' 
+			}, function success(response){
+				$scope.message = '数据提交成功';
+				$scope.result = 'success';
+				$scope.progress = false;
+			}, function error(response){
+				console.log(JSON.stringify(response));
+				$scope.message = '数据提交失败';
+				$scope.result = 'danger';
+				$scope.progress = false;
+			});
+		}
 	}
 ]);

@@ -26,3 +26,11 @@ GeneralServices.factory('getContributors', ['$resource',
 		});
 	}
 ]);
+
+GeneralServices.factory('submitError', ['$resource', 
+	function($resource, data){
+		return $resource('https://redmine-enix.rhcloud.com/issues.json', {}, {
+			post: {method: 'POST', cache: false, isArray: false}
+		});
+	}
+]);
