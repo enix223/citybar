@@ -107,7 +107,8 @@ GeneralControllers.controller('ReportErrorCtrl', ['$scope', 'getGroupsData',
 			};
 			submitError.post({
 				issue: data, 
-				key: '7a74c72afa037d7fdb52bdd99b076f573ca5eead' 
+				key: '7a74c72afa037d7fdb52bdd99b076f573ca5eead',
+				callback: ''
 			}, function success(response){
 				$scope.message = '数据提交成功';
 				$scope.result = 'success';
