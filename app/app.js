@@ -24,6 +24,9 @@ citybarApp.config(['$routeProvider', '$locationProvider',
 			}).when('/about/', {
 				templateUrl: 'templates/general/about.html',
 				controller: 'AboutCtrl'
+			}).when('/donate/', {
+				templateUrl: 'templates/general/donate.html',
+				controller: 'DonateCtrl'
 			}).otherwise({
                 redirectTo: '/mapMode/bicycle/'
             });;

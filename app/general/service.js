@@ -27,6 +27,18 @@ GeneralServices.factory('getContributors', ['$resource',
 	}
 ]);
 
+/**
+  * @breif  Get the Donator json format
+  * @retval return a service function
+  */
+GeneralServices.factory('getDonator', ['$resource', 
+	function($resource){
+		return $resource('data/donate.json', {}, {
+			get: {method: 'GET', cache: false, isArray: true}
+		});
+	}
+]);
+
 GeneralServices.factory('submitError', ['$resource', 
 	function($resource, data){
 		return $resource('https://redmine-enix.rhcloud.com/issues.json', {}, {

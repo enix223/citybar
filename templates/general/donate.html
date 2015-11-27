@@ -1,0 +1,40 @@
+<div ng-include src="'templates/general/menu.html'"></div>
+<div id="mapper" style="display: none;"></div>
+<div class="am-g">
+	<div class="am-u-sm-12 am-text-center">
+		<h1 class="am-text-success am-margin-xl "><i class="am-icon-star am-icon-spin"></i> &nbsp;Donate</h1>
+	<hr>
+	</div>
+	<div class="am-u-sm-12">
+		<p class="am-margin-xl">如果您觉得这个项目可以帮到您...</p>
+		<p class="am-margin-xl">如果您觉得这个项目很有意义...</p>
+		<p class="am-margin-xl">如果您想对这个项目贡献一份力量...</p>
+		<p class="am-margin-xl">扫一扫如下二维码，小小的捐赠也是对我们莫大的鼓励。</p>
+		<p class="am-margin-xl am-cf">
+			<img src="static/img/fa-wepay-ea61d2331ac.jpg"
+				class="am-img-responsive am-radius am-img-thumbnail am-center" alt="wechat"/></p>
+		<p class="am-margin-xl">感谢如下无私奉献的亲们:</p>
+		<div class="am-margin-xl">
+	      <section data-am-widget="accordion" class="am-accordion am-accordion-default" data-am-accordion='{ "multiple": true }'>
+	        <dl class="am-accordion-item">
+	          <dt class="am-accordion-title"><i class="am-icon-users"></i> 项目捐赠者</dt>
+	          <dd class="am-accordion-bd am-collapse">
+	            <!-- Bike contribute list -->
+	            <div class="am-accordion-content">
+	                <p>排名不分先后</p>
+	                <div ng-repeat="donator in donators" 
+	                  class="am-badge am-badge-success am-margin-horizontal-xs">{{donator.name}}</div>
+	            </div>
+	          </dd>
+	        </dl>	        
+	    </section>
+	   </div>
+	</div>		
+
+	<!-- Comment -->
+	<div class="am-u-sm-12">
+		<div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-default" data-ds-short-name="amazeui">
+			<div class="ds-thread"></div>
+		</div>
+	</div>
+</div>

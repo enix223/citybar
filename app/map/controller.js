@@ -230,6 +230,25 @@ MapControllers.controller('ListModeCtrl',
 			}
 			response.sort(jsonSort('asc', 'distance'));
 			$scope.dataPoints = response;
+
+			// init page num
+			$scope.page = 0;
+			$scope.nextPage(); 
+		}
+
+		/**
+		  * @brief  Show all records
+		  * @retval None
+		  */
+		$scope.nextPage = function(){
+			$scope.page += 1;
+			$scope.dataPointShown = $scope.dataPoints.slice(0, 10 * $scope.page);
+
+			if($scope.page * 10 >= $scope.dataPoints.length){
+				$scope.click = false;
+			} else {
+				$scope.click = true;
+			}
 		}
 
 		/**
@@ -296,7 +315,7 @@ MapControllers.controller('ListModeCtrl',
 		var mapper = getMapper("mapper");
 
 		// Get group param from route param
-		$scope.group = $routeParams.group;
+		$scope.group = $routeParams.group;		
 
 		// Get location control (for GPS location)
 		$scope.geolocationControl = getGeolocationControl();		
@@ -305,19 +324,29 @@ MapControllers.controller('ListModeCtrl',
 		$scope.geolocationControl.addEventListener("locationError", fnGetLocationFail);
 
 		// 开始定位
-		$scope.geolocationControl.location();				
+		$scope.geolocationControl.location();	
 
-		$scope.getWalkRouting = function($event, point){
+		$scope.loading = {}			
+
+		
+		/** 
+		  * @brief  Calculate walking route event
+		  */		
+		$scope.getWalkRouting = function($event, point){			
 			var walkResultId = 'walk-rs-' + point.id;
 			var walkRsDiv = angular.element($event.currentTarget).find('div');
 			if(walkRsDiv.html() == ''){
 				walkRsDiv.html(''); // clear all the walk result				
 				var walking = new BMap.WalkingRoute(mapper, {renderOptions: {map: mapper, panel: walkResultId, autoViewport: true}});
+				walking.setSearchCompleteCallback(function(){
+					$scope.$apply(function(){$scope.loading[point.id] = false});
+				});
+				$scope.loading[point.id] = true;
 				walking.search($scope.point, new BMap.Point(point.longitude, point.latitude));
-				walkRsDiv.css('margin-top', '10px');
+				walkRsDiv.css('margin-top', '10px');				
 			} else {
 				walkRsDiv.css('margin-top', '0');
-				walkRsDiv.html(''); // clear all the walk result
+				walkRsDiv.html(''); // clear all the walk result				
 			}
 		}		
 	}

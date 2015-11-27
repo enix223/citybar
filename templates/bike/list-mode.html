@@ -9,12 +9,15 @@
 	</div>
 	<div class="am-u-sm-12" style="margin-bottom: 60px;">
 		<ul class="am-list am-list-static am-list-border">
-			<li ng-repeat="point in dataPoints" class="am-cf am-text-sm" style="cursor: pointer" ng-click="getWalkRouting($event, point)">
+			<li ng-repeat="point in dataPointShown" class="am-cf am-text-sm" style="cursor: pointer" ng-click="getWalkRouting($event, point)">
 				<span><i class="am-icon-{{group}} am-icon-fw"></i> &nbsp;{{point.name}}</span>
 				<span class="am-badge am-badge-success">{{point.number}}</span>		
-				<p class="am-margin-vertical-xs am-text-danger am-text-xs"><i class="am-icon-road am-icon-fw"></i> &nbsp;&nbsp;距离您{{point.distance}}米</p>
+				<p class="am-margin-vertical-xs am-text-danger am-text-xs"><i class="am-icon-road am-icon-fw"></i> &nbsp;&nbsp;距离您{{point.distance}}米 &nbsp; <i ng-show="loading[point.id]" class="am-icon-spinner am-icon-spin"></i></p>
 				<div class="walk-rs" id="walk-rs-{{point.id}}"></div>
 			</li>
+			<li ng-show="click" class="am-cf">
+				<a class="am-text-sm" style="text-align: center;" href="" ng-click="nextPage()">
+					<i class="am-icon-chevron-right"></i> 显示更多</a></li>
 		</ul>
 	</div>
 </div>

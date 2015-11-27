@@ -1,8 +1,18 @@
 var GeneralControllers = angular.module('GeneralControllers', []);
 
-GeneralControllers.controller('DonateCtrl', function(){
-	$scope.account = 'figo223'
-});
+GeneralControllers.controller('DonateCtrl', ['$scope', 'getDonator', function($scope, getDonator){
+	// Amazeui widget init.
+	$.AMUI.accordion.init();
+	
+	getDonator.get({}, 
+		function success(response){
+			$scope.donators = response;
+		},
+		function error(error){
+			console.log(error);
+		}
+	);
+}]);
 
 GeneralControllers.controller('AboutCtrl', ['$scope', 'getContributors', 
 	function($scope, getContributors){
@@ -30,12 +40,12 @@ GeneralControllers.controller('ReportErrorCtrl', ['$scope', 'getGroupsData',
 
 		// Amazeui widget init.
 		$.AMUI.accordion.init();
-		$('[data-am-selected]').selected({btnWidth: '100%', dropUp: 1});
+		$('[data-am-selected]').selected({btnWidth: '100%', dropUp: 1, maxHeight: 300});
 
 		var geolocation = new BMap.Geolocation();
 		geolocation.getCurrentPosition(function(r){
 			if(this.getStatus() == BMAP_STATUS_SUCCESS){
-				$scope.myPoint = r.point;
+				$scope.$apply(function(){$scope.myPoint = r.point});
 			}
 			else {
 				console.log('Get location failed, ' + this.getStatus());
