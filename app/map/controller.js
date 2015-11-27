@@ -18,24 +18,52 @@ MapControllers.controller('MapModeCtrl',
   		}
 
   		/**
+  		  * @brief  Reload the data points in current bound to the map
+  		  * @param  e event
+  		  * @retval None
+  		  */ 
+  		fnRefreshPoints = function(e){   			
+  			for(var i = 0; i < $scope.dataPoints.length; i ++){
+				var mkPoint = new BMap.Point($scope.dataPoints[i].longitude, $scope.dataPoints[i].latitude);
+
+				// check if the data already loaded
+				var isLoaded = ($scope.dataPoints[i].id in $scope.loadedPoints);
+
+				// only shown the points in the current bounds and not loaed yet
+				if(mapper.getBounds().containsPoint(mkPoint)){
+					if(isLoaded){
+						continue;
+					}
+
+					var myIcon = new BMap.Icon("static/img/fa-marker.png", new BMap.Size(48,48));
+					var myMarker = new BMap.Marker(mkPoint, {icon:myIcon});  // 创建标注
+						mapper.addOverlay(myMarker);
+						myMarker.setAnimation(BMAP_ANIMATION_DROP); //跳动的动画
+						myMarker.addEventListener("click", fnWalkRouting);
+						myMarker.setTitle($scope.dataPoints[i].name);
+
+						$scope.loadedPoints[$scope.dataPoints[i].id] = myMarker;
+				} else {
+					// Remove the loaed points from global array					
+					if(isLoaded){
+						mapper.removeOverlay($scope.loadedPoints[$scope.dataPoints[i].id]);
+						delete $scope.loadedPoints[$scope.dataPoints[i].id];
+					}
+				}
+			}
+  		}
+
+  		/**
   		  * @brief  Get JSON data success callback
   		  * @param  response, JSON call response
   		  * @retval None
   		  */
   		fnGetJsonDataSuccess = function(response){
-			for(var i = 0; i < response.length; i ++){
-				var mkPoint = new BMap.Point(response[i].longitude, response[i].latitude);
-				var myIcon = new BMap.Icon("static/img/fa-marker.png", new BMap.Size(48,48));
-				var myMarker = new BMap.Marker(mkPoint, {icon:myIcon});  // 创建标注
-					mapper.addOverlay(myMarker);
-					myMarker.setAnimation(BMAP_ANIMATION_DROP); //跳动的动画
-					myMarker.addEventListener("click", fnWalkRouting);
-					myMarker.setTitle(response[i].name)
-					
-					// Label
-					//var label = new BMap.Label(response[i].name ,{offset:new BMap.Size(20,-10)});
-					//myMarker.setLabel(label);
-			}
+			$scope.dataPoints = response;
+			
+			// Register map move end event listener after data loaded
+			mapper.addEventListener('moveend', fnRefreshPoints);
+			fnRefreshPoints(null); // load the data points
 		}
 
 		/**
@@ -142,7 +170,7 @@ MapControllers.controller('MapModeCtrl',
 				map.clearOverlays();    //清除地图上所有覆盖物
 				function myFun(){
 					$scope.myPoint = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
-					map.centerAndZoom($scope.myPoint, 17);
+					map.centerAndZoom($scope.myPoint, 16);
 					map.addOverlay(new BMap.Marker($scope.myPoint));    //添加标注
 					fnOnConfirm($scope.group);  // Call on-confirm callback when location change
 				}
@@ -155,16 +183,17 @@ MapControllers.controller('MapModeCtrl',
 
 	  	// Get the data group to be displayed
 	 	$scope.group = $routeParams.group;
+	 	$scope.loadedPoints = {};
 
 		// mapper object
-		var mapper = getMapper("mapper");
+		var mapper = getMapper("mapper");		
 
 		// walking route
 		var walking = new BMap.WalkingRoute(mapper, {renderOptions:{map: mapper, autoViewport: true}});
 
 		// init current point
 		$scope.myPoint = new BMap.Point(113.2606120000,22.8461620000);
-		mapper.centerAndZoom($scope.myPoint, 17);
+		mapper.centerAndZoom($scope.myPoint, 16);
 
 		// Add navigation control
 		$scope.navigationControl = getNavControl();
