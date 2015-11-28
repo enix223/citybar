@@ -3,6 +3,7 @@ var GeneralControllers = angular.module('GeneralControllers', []);
 GeneralControllers.controller('DonateCtrl', ['$scope', 'getDonator', function($scope, getDonator){
 	// Amazeui widget init.
 	$.AMUI.accordion.init();
+	$.AMUI.duoshuo.init();
 	
 	getDonator.get({}, 
 		function success(response){
@@ -15,8 +16,10 @@ GeneralControllers.controller('DonateCtrl', ['$scope', 'getDonator', function($s
 }]);
 
 GeneralControllers.controller('AboutCtrl', ['$scope', 'getContributors', 
-	function($scope, getContributors){
+	function($scope, getContributors){		
+		// Amazeui widget init.
 		$.AMUI.accordion.init();
+		$.AMUI.duoshuo.init();
 		
 		// Get contributors
 		getContributors.get({}, 
